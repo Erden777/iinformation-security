@@ -1,0 +1,34 @@
+<html>
+
+<head>
+<title>Input</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+</head>
+
+<body>
+<h3 class="text-center mt-4">Information security<h3>
+   <div class="container mt-4">
+      <div class="col-6 offset-3"> 
+      <hr>
+      <form name="Input">
+                  <input class="form-control"  type="text" placeholder="p" name="p" size="20">
+                  <input class="form-control mt-2"  type="text" placeholder="q" name="q" size="20">
+            <input class="form-control mt-2"  type="text" required name="name" placeholder="encrypt message" id="">
+               <div onClick="openNew()" class="btn btn-success mt-2">Submit</div>
+      </form>
+      <hr class="my-4">
+      <h5>Using public key</h5>
+      <div class="res"></div>
+
+
+      <h5>Using private key</h5>
+      <div class="res-2"></div>
+   </div>
+   </div>
+
+   <script src="rsa.js"></script>
+</body>
+
+</html>
