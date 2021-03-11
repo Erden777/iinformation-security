@@ -23,51 +23,31 @@
             <div class="row">
                 <div class="col-md-4">Our users {{online_user}}</div>
                 <div class="col-md-8">
-                    {% for chat in all_chats %}
+                    {% for message in messages %}
                     <div class="card border-success mt-3">
                         <div class="row no-gutters">
-                            <div class="col-md-2 ml-3">
+                            <div class="col-md-3 ml-3">
+                            <img class="mt-3 ml-4 my-4 mx-4" src="https://www.computerhope.com/jargon/g/guest-user.jpg" alt="..." style="height:150px; weight:150px ">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    
-                                    <button type="button" class="card-title h6" data-bs-toggle="modal" data-bs-target="#exampleModal{{chat.id}}">
-                                        {{ chat.title }}
-                                    </button>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    <a href="/easy/{{ message.id }}/" class="card-title h6">{{ message.user_id.full_name }}</a>
+                                    <p class="card-text">{{ message.message_text }}.</p>
+                                    <p class="card-text"><small class="text-muted">{{message.sent_date}}</small></p>
                                 </div>
                             </div>
                         </div> 
                     </div>
-
-                        <div class="modal fade" id="exampleModal{{chat.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-                       <div class="modal-dialog">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <Form action="{% url 'check_password' chat_id=chat.id %}" method="post">
-                            {% csrf_token %}
-                            <div class="modal-body">
-                                
-                                <div class="input-group">
-                                <span class="input-group-text">Enter password: </span>
-                                <input type="password" name="password" aria-label="password" class="form-control">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div>
-                            </Form>
-                            </div>
-                        </div>
-                        </div>
-
                     {% endfor %}
+                    <Form action="{% url 'post_message' %}" method="post">
+                            {% csrf_token %}
+                        <input type="hidden" name="chat_id" , value="{{chat.id}}">
+                        <div class="bg-light p-2 mt-5">
+                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://www.computerhope.com/jargon/g/guest-user.jpg" width="40"><textarea name="text" class="form-control ml-1 shadow-none textarea"></textarea></div>
+                        <div class="mt-3 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
+                    </div>
+                </Form>
+
                 </div>
             </div>
         </div> 

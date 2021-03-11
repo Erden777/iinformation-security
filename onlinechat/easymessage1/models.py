@@ -12,18 +12,23 @@ class User(models.Model):
 
 
 class Chat(models.Model):
+    title = models.CharField(max_length=50)
     message_password = models.CharField(max_length=50)
-    last_message = models.CharField(max_length=200)
-    user_id = models.ForeignKey(User, related_name='related_user_id', on_delete=models.CASCADE)
-    opponent_user_id = models.ForeignKey(User, related_name='related_opponent_user_id', on_delete=models.CASCADE)
 
     def __str__(self):
-        return last_message
+        return self.title
+        
+class ChatinUsers(models.Model):
+    chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, related_name='related_user_id', on_delete=models.CASCADE)
+    subscribed_date = models.DateTimeField(auto_now_add=True, blank=True)
 
 class Message(models.Model):
     chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE)
     message_text = models.CharField(max_length=400)
     sent_date = models.DateTimeField(auto_now_add=True, blank=True)
     
+    user_id = models.ForeignKey(User, related_name='related_sended_user_id', on_delete=models.CASCADE)
+
     def __str__(self):
-        return self.headline
+        return self.message_text
